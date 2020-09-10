@@ -8,7 +8,6 @@ class Main {
     kanScreen(fu, sca);
     vatScreen(fu, sca);
     ibcScreen(fu, sca);
-    
     fu.printData();
   }
   
@@ -16,7 +15,12 @@ class Main {
     System.out.println("Hallo en welkom bij de van Iperen fust calculator!");
     System.out.println("---------------------------------------------");
     System.out.println("Voer datum in (ddmmyy)");
-    String temp = sc.nextLine();
+    String temp = null;
+    while (true){
+      temp = sc.nextLine();
+      if (checkDatum(temp)) break;
+      System.out.println("INCORRECT. voer een geldige datum in (ddmmyy)");
+    }
     return temp;
   }
   
@@ -71,61 +75,64 @@ class Main {
     }
   }
   
-  private boolean checkDatum(String dt){
+  private static boolean checkDatum(String dt){
     int count=0;
-    boolean correct = false;
+    boolean correct = true;
     boolean dagCorrect = false;
     boolean maandCorrect = false;
-    String dag = "";
-    String maand = "";
-    String jaar = "";
-    for (char c:dt){
-      if !(c<='9' && c>='0') correct= false;
-      count++
-    } else 
- correct = true;
-    // TODO check datum 
-    dag=dt.substring(0,2);
-    maand=dt.substring(2,4);
-    jaar=dt.substring(4);
-    // TODO of het ddmmyy is
-    // TODO dagen 28,29,30 of 31 
+    boolean jaarCorrect = false;
+    int dag = 0;
+    int maand = 0;
+    int jaar = 0;
+    for (int i=0;i<dt.length();i++){
+      char c = dt.charAt(i);
+      if (!(c<='9' && c>='0') && correct) correct = false;
+     else {
+      correct = true;
+      count++;
+     }
+    }
+    
+    dag=Integer.parseInt(dt.substring(0,2));
+    maand=Integer.parseInt(dt.substring(2,4));
+    jaar=Integer.parseInt(dt.substring(4));
+
     switch (maand) {
       case 1:
-        if(dag>=1 && dag<=31 ) dagCorrect=true;
+        if(dag>=01 && dag<=31 ) dagCorrect=true;
       break;
       case 2:
-        if(dag>=1 && dag<=29 ) dagCorrect=true;
+        if(dag>=01 && dag<=29 ) dagCorrect=true;
       break;
       case 3:
-        if(dag>=1 && dag<=31 ) dagCorrect=true;
+        if(dag>=01 && dag<=31 ) dagCorrect=true;
       break;
       case 4:
-        if(dag>=1 && dag<=30 ) dagCorrect=true;
+        if(dag>=01 && dag<=30 ) dagCorrect=true;
       break;
       case 5:
-        if(dag>=1 && dag<=31 ) dagCorrect=true;
+        if(dag>=01 && dag<=31 ) dagCorrect=true;
       break;
       case 6:
-        if(dag>=1 && dag<=30 ) dagCorrect=true;
+        if(dag>=01 && dag<=30 ) dagCorrect=true;
       break;
       case 7:
-        if(dag>=1 && dag<=31 ) dagCorrect=true;
+        if(dag>=01 && dag<=31 ) dagCorrect=true;
       break;
       case 8:
-        if(dag>=1 && dag<=31 ) dagCorrect=true;
+        if(dag>=01 && dag<=31 ) dagCorrect=true;
       break;
       case 9:
-        if(dag>=1 && dag<=30 ) dagCorrect=true;
+        if(dag>=01 && dag<=30 ) dagCorrect=true;
       break;
       case 10:
-        if(dag>=1 && dag<=31 ) dagCorrect=true;
+        if(dag>=01 && dag<=31 ) dagCorrect=true;
       break;
       case 11:
-        if(dag>=1 && dag<=30 ) dagCorrect=true;
+        if(dag>=01 && dag<=30 ) dagCorrect=true;
       break;
       case 12:
-        if(dag>=1 && dag<=31 ) dagCorrect=true;
+        if(dag>=01 && dag<=31 ) dagCorrect=true;
       break;
       default:
           dagCorrect=false;
@@ -138,4 +145,6 @@ class Main {
     // TODO maak er ook een 'gewone datum' van
     return (correct && dagCorrect && maandCorrect && jaarCorrect);
   }
+
+ 
 }
